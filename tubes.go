@@ -14,4 +14,5 @@ func main() {
 	} else {
 		fmt.Println("Good evening!")
 	}
+	fmt.Println("Bagas")
 }
