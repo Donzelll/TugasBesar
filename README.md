@@ -1,2 +1,1 @@
-Selamat Datang Di Program Kami
-Versi 1 Beta
+Selamat Datang Di Program Kami\nVersi 1 Beta
