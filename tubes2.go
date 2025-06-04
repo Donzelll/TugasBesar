@@ -14,7 +14,7 @@ type tabPolusi [NMAX]struct {
 
 func main() {
 	var data tabPolusi
-	var n, choice, polusi int
+	var n, choice, polusi, mode int
 	var kota string
 	var inputKota string
 
@@ -22,37 +22,47 @@ func main() {
 		menu()
 		fmt.Print("\nPilih menu: ")
 		fmt.Scan(&choice)
-
+		modeSearch := true
 		switch choice {
 		case 1:
 			tambahData(&data, &n)
-			printData(data, n)
+			printData(data, n, modeSearch)
 		case 2:
 			tambahBanyakData(&data, &n)
-			printData(data, n)
+			printData(data, n, modeSearch)
 		case 3:
 			fmt.Print("Masukkan nama kota yang ingin dihapus: ")
 			fmt.Scan(&kota)
-			deleteData(&data, &n, kota)
-			printData(data, n)
+			deleteData(&data, &n, kota, modeSearch)
+			printData(data, n, modeSearch)
 		case 4:
 			fmt.Print("Masukkan nama kota yang ingin dimodifikasi: ")
 			fmt.Scan(&kota)
 			fmt.Print("Masukkan tingkat polusi baru: ")
 			fmt.Scan(&polusi)
-			modifData(&data, &n, kota, polusi)
-			printData(data, n)
+			modifData(&data, &n, kota, polusi, modeSearch)
+			printData(data, n, modeSearch)
 		case 5:
 			fmt.Print("Masukkan nama kota yang ingin dicari: ")
 			fmt.Scan(&inputKota)
-			cariKota(data, n, inputKota)
+			cariKota(data, n, inputKota, modeSearch)
 		case 6:
-			urutanNaik(&data, n)
-			printData(data, n)
+			insertionSortNaik(&data, n)
+			printData(data, n, modeSearch)
 		case 7:
-			urutanTurun(&data, n)
-			printData(data, n)
+			insertionSortTurun(&data, n)
+			printData(data, n, modeSearch)
 		case 8:
+			fmt.Println("Mode pencarian: (1) Sequential\n(2) Binary")
+			fmt.Scan(&mode)
+			if mode == 1 {
+				modeSearch = true
+			} else if mode == 2 {
+				modeSearch = false
+			} else {
+				fmt.Println("Pilihan tidak valid. Kembali ke menu utama.")
+			}
+		case 9:
 			fmt.Println("Terima kasih telah menggunakan program ini!")
 			return
 		default:
@@ -70,7 +80,8 @@ func menu() {
 	fmt.Println("5. Cari Data Berdasarkan Kota")
 	fmt.Println("6. Urutkan Data Naik Berdasarkan Polusi")
 	fmt.Println("7. Urutkan Data Turun Berdasarkan Polusi")
-	fmt.Println("8. Keluar")
+	fmt.Println("8. Mode Pencarian")
+	fmt.Println("9. Keluar")
 }
 
 func waktu() string {
@@ -108,18 +119,53 @@ func tambahData(data *tabPolusi, n *int) {
 	fmt.Println("Data berhasil ditambahkan")
 }
 
-func searchData(data tabPolusi, n int, kota string) int {
-	for i := 0; i < n; i++ {
+// Sequential Search
+func sequentialSearch(data tabPolusi, n int, kota string) int {
+	var i, index int
+	index = -1
+	for index == -1 && i < n {
 		if data[i].kota == kota {
-			return i
+			index = i
+		}
+		i++
+	}
+	return index
+}
+
+func searchData(data tabPolusi, n int, searchMode bool, kota string) int {
+	if searchMode {
+		return sequentialSearch(data, n, kota)
+	} else {
+		return binarySearch(data, n, kota)
+	}
+}
+
+// Binary Search
+func binarySearch(data tabPolusi, n int, kota string) int {
+	low := 0
+	high := n - 1
+	for low <= high {
+		mid := (low + high) / 2
+		if data[mid].kota == kota {
+			return mid
+		} else if data[mid].kota < kota {
+			low = mid + 1
+		} else {
+			high = mid - 1
 		}
 	}
 	return -1
 }
 
-func printData(data tabPolusi, n int) {
+func printData(data tabPolusi, n int, modeSearch bool) {
 	var status string
 	var i int
+
+	if modeSearch {
+		fmt.Println("\nMode Pencarian: Sequential")
+	} else {
+		fmt.Println("\nMode Pencarian: Binary")
+	}
 
 	fmt.Printf("\nBerikut Data Polusi\n%16s %10s %35s\n", "Nama Kota", "Polusi", "Status Udara")
 
@@ -149,22 +195,23 @@ func dataStatus(data tabPolusi, i int) string {
 	}
 }
 
-func deleteData(data *tabPolusi, n *int, kota string) {
-	index := searchData(*data, *n, kota)
+func deleteData(data *tabPolusi, n *int, kota string, modeSearch bool) {
+	index := searchData(*data, *n, modeSearch, kota)
 	if index == -1 {
 		fmt.Println("Data tidak ditemukan.")
 		return
 	}
 
-	for i := index; i < *n-1; i++ {
-		data[i] = data[i+1]
+	for index < *n-1 {
+		(*data)[index] = (*data)[index+1]
+		index++
 	}
 	*n--
 	fmt.Println("Data berhasil dihapus")
 }
 
-func modifData(data *tabPolusi, n *int, kota string, polusi int) {
-	index := searchData(*data, *n, kota)
+func modifData(data *tabPolusi, n *int, kota string, polusi int, modeSearch bool) {
+	index := searchData(*data, *n, modeSearch, kota)
 	if index == -1 {
 		fmt.Println("Data tidak ditemukan.")
 		return
@@ -175,34 +222,46 @@ func modifData(data *tabPolusi, n *int, kota string, polusi int) {
 	fmt.Println("Data berhasil dimodifikasi")
 }
 
-func cariKota(data tabPolusi, n int, kota string) {
-	for i := 0; i < n; i++ {
-		if data[i].kota == kota {
-			printData(data, n)
-			fmt.Printf("\nBerikut Data Kota yang anda cari\n%16s %10s %35s\n", "Nama Kota", "Polusi", "Status Udara")
-			fmt.Printf("%16s %10d %35s\n", data[i].kota, data[i].polusi, dataStatus(data, i))
-		}
-	}
-	return
-}
-
-func urutanNaik(data *tabPolusi, n int) {
-	for i := 0; i < n-1; i++ {
-		for j := i + 1; j < n; j++ {
-			if data[i].polusi > data[j].polusi {
-				data[i], data[j] = data[j], data[i]
-			}
-		}
+func cariKota(data tabPolusi, n int, kota string, modeSearch bool) {
+	index := searchData(data, n, modeSearch, kota)
+	printData(data, n, modeSearch)
+	if index == -1 {
+		fmt.Println("Kota tidak ditemukan.")
+	} else {
+		status := dataStatus(data, index)
+		fmt.Printf("Berikut adalah data Kota yang anda cari: \nKota: %s, Polusi: %d, Status Udara: %s\n", data[index].kota, data[index].polusi, status)
 	}
 }
 
-func urutanTurun(data *tabPolusi, n int) {
-	for i := 0; i < n-1; i++ {
-		for j := i + 1; j < n; j++ {
-			if data[i].polusi < data[j].polusi {
-				data[i], data[j] = data[j], data[i]
-			}
+func insertionSortNaik(data *tabPolusi, n int) {
+	var pass, i int
+	var temp tabPolusi
+	pass = 1
+	for pass < n {
+		i = pass
+		temp[0] = (*data)[i]
+		for i > 0 && (*data)[i-1].polusi > temp[0].polusi {
+			(*data)[i] = (*data)[i-1]
+			i--
 		}
+		(*data)[i] = temp[0]
+		pass++
+	}
+}
+
+func insertionSortTurun(data *tabPolusi, n int) {
+	var pass, i int
+	var temp tabPolusi
+	pass = 1
+	for pass < n {
+		i = pass
+		temp[0] = (*data)[i]
+		for i > 0 && (*data)[i-1].polusi < temp[0].polusi {
+			(*data)[i] = (*data)[i-1]
+			i--
+		}
+		(*data)[i] = temp[0]
+		pass++
 	}
 }
 
