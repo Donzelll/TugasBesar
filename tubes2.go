@@ -21,8 +21,8 @@ func main() {
 	for {
 		menu()
 		fmt.Print("\nPilih menu: ")
-		fmt.Scan(&choice)
 		modeSearch := true
+		fmt.Scan(&choice)
 		switch choice {
 		case 1:
 			tambahData(&data, &n)
