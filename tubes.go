@@ -14,12 +14,8 @@ type tabPolusi [NMAX]struct {
 
 func main() {
 	var data tabPolusi
-	var n int
-	var choice int
-	var kota string
-	var polusi int
-	var index int
-	var inputKota string
+	var n, choice, polusi, index int
+	var kota, inputKota string
 
 	for {
 		menu()
