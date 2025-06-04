@@ -27,28 +27,31 @@ func main() {
 			tambahData(&data, &n)
 			printData(data, n)
 		case 2:
+			tambahBanyakData(&data, &n)
+			printData(data, n)
+		case 3:
 			fmt.Print("Masukkan nama kota yang ingin dihapus: ")
 			fmt.Scan(&kota)
 			deleteData(&data, &n, kota)
 			printData(data, n)
-		case 3:
+		case 4:
 			fmt.Print("Masukkan nama kota yang ingin dimodifikasi: ")
 			fmt.Scan(&kota)
 			fmt.Print("Masukkan tingkat polusi baru: ")
 			fmt.Scan(&polusi)
 			modifData(&data, &n, kota, polusi)
 			printData(data, n)
-		case 4:
+		case 5:
 			fmt.Print("Masukkan nama kota yang ingin dicari: ")
 			fmt.Scan(&inputKota)
 			cariKota(data, n, inputKota)
-		case 5:
+		case 6:
 			urutanNaik(&data, n)
 			printData(data, n)
-		case 6:
+		case 7:
 			urutanTurun(&data, n)
 			printData(data, n)
-		case 7:
+		case 8:
 			fmt.Println("Terima kasih telah menggunakan program ini!")
 			return
 		default:
@@ -60,12 +63,13 @@ func main() {
 func menu() {
 	fmt.Println("\nMenu:")
 	fmt.Println("1. Tambah Data")
-	fmt.Println("2. Hapus Data")
-	fmt.Println("3. Modifikasi Data")
-	fmt.Println("4. Cari Data Berdasarkan Kota")
-	fmt.Println("5. Urutkan Data Naik Berdasarkan Polusi")
-	fmt.Println("6. Urutkan Data Turun Berdasarkan Polusi")
-	fmt.Println("7. Keluar")
+	fmt.Println("2. Tambah Banyak Data")
+	fmt.Println("3. Hapus Data")
+	fmt.Println("4. Modifikasi Data")
+	fmt.Println("5. Cari Data Berdasarkan Kota")
+	fmt.Println("6. Urutkan Data Naik Berdasarkan Polusi")
+	fmt.Println("7. Urutkan Data Turun Berdasarkan Polusi")
+	fmt.Println("8. Keluar")
 }
 
 func waktu() string {
@@ -199,4 +203,19 @@ func urutanTurun(data *tabPolusi, n int) {
 			}
 		}
 	}
+}
+
+func tambahBanyakData(data *tabPolusi, n *int) {
+	var tempKota string
+	fmt.Print("Masukkan nama kota dan polusi / (\"send\"): ")
+	fmt.Scan(&tempKota)
+	for tempKota != "send" {
+		if tempKota != "send" {
+			data[*n].kota = tempKota
+			fmt.Scan(&data[*n].polusi)
+			*n++
+			fmt.Scan(&tempKota)
+		}
+	}
+	fmt.Println("Data berhasil ditambahkan")
 }
