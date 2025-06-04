@@ -8,8 +8,13 @@
 1. Penambahan Fitur Tambah
 2. Penambahan Greetings sesuai waktu (Pagi/Siang/Sore/Malam)
 
+#### Update Beta 1.1:
+1. Penggantian metode modif kota dari mencari berdasarkan indeks menjadi mencari berdasarkan nama kota
+2. Penambahan sub-program searching
+
 #### Fitur:
 
-1. Menambah Data dan Kota
-2. Mencari Kota
-3. Mengurutkan Berdasarkan Polusi Paling Tinggi/Rendah
+1. Menambah Data Kota
+2. Memodif Data Kota
+3. Mencari Kota
+4. Mengurutkan Berdasarkan Polusi Paling Tinggi/Rendah
