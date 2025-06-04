@@ -14,12 +14,8 @@ type tabPolusi [NMAX]struct {
 
 func main() {
 	var data tabPolusi
-	var n int
-	var choice int
-	var kota string
-	var polusi int
-	var index int
-	var inputKota string
+	var n, choice, polusi int
+	var kota, inputKota string
 
 	for {
 		menu()
@@ -28,27 +24,31 @@ func main() {
 
 		switch choice {
 		case 1:
-			tambahData(&data, &n, kota, polusi)
+			tambahData(&data, &n)
 			printData(data, n)
 		case 2:
-			fmt.Print("Masukkan index data yang ingin dihapus: ")
-			fmt.Scan(&index)
-			deleteData(&data, &n, index)
+			fmt.Print("Masukkan nama kota yang ingin dihapus: ")
+			fmt.Scan(&kota)
+			deleteData(&data, &n, kota)
 			printData(data, n)
 		case 3:
-			fmt.Print("Masukkan urutan data yang ingin dimodifikasi: ")
-			fmt.Scan(&index)
-			fmt.Print("Masukkan nama kota baru: ")
+			fmt.Print("Masukkan nama kota yang ingin dimodifikasi: ")
 			fmt.Scan(&kota)
 			fmt.Print("Masukkan tingkat polusi baru: ")
 			fmt.Scan(&polusi)
-			modifData(&data, &n, index, kota, polusi)
+			modifData(&data, &n, kota, polusi)
 			printData(data, n)
 		case 4:
 			fmt.Print("Masukkan nama kota yang ingin dicari: ")
 			fmt.Scan(&inputKota)
 			cariKota(data, n, inputKota)
 		case 5:
+			urutanNaik(&data, n)
+			printData(data, n)
+		case 6:
+			urutanTurun(&data, n)
+			printData(data, n)
+		case 7:
 			fmt.Println("Terima kasih telah menggunakan program ini!")
 			return
 		default:
@@ -63,7 +63,9 @@ func menu() {
 	fmt.Println("2. Hapus Data")
 	fmt.Println("3. Modifikasi Data")
 	fmt.Println("4. Cari Data Berdasarkan Kota")
-	fmt.Println("5. Keluar")
+	fmt.Println("5. Urutkan Data Naik Berdasarkan Polusi")
+	fmt.Println("6. Urutkan Data Turun Berdasarkan Polusi")
+	fmt.Println("7. Keluar")
 }
 
 func waktu() string {
@@ -82,7 +84,9 @@ func waktu() string {
 	}
 }
 
-func tambahData(data *tabPolusi, n *int, kota string, polusi int) {
+func tambahData(data *tabPolusi, n *int) {
+	var kota string
+	var polusi int
 	fmt.Print("Masukkan nama kota / (\"send\"): ")
 	fmt.Scan(&kota)
 	for kota != "send" {
@@ -96,6 +100,16 @@ func tambahData(data *tabPolusi, n *int, kota string, polusi int) {
 			fmt.Scan(&kota)
 		}
 	}
+	fmt.Println("Data berhasil ditambahkan")
+}
+
+func searchData(data tabPolusi, n int, kota string) int {
+	for i := 0; i < n; i++ {
+		if data[i].kota == kota {
+			return i
+		}
+	}
+	return -1
 }
 
 func printData(data tabPolusi, n int) {
@@ -130,22 +144,24 @@ func dataStatus(data tabPolusi, i int) string {
 	}
 }
 
-func deleteData(data *tabPolusi, n *int, index int) {
-	if index < 1 || index >= (*n+1) {
-		fmt.Println("Nomor tidak valid")
+func deleteData(data *tabPolusi, n *int, kota string) {
+	index := searchData(*data, *n, kota)
+	if index == -1 {
+		fmt.Println("Data tidak ditemukan.")
 		return
 	}
 
-	for i := (index - 1); i < *n-1; i++ {
+	for i := index; i < *n-1; i++ {
 		data[i] = data[i+1]
 	}
 	*n--
 	fmt.Println("Data berhasil dihapus")
 }
 
-func modifData(data *tabPolusi, n *int, index int, kota string, polusi int) {
-	if index < 0 || index >= *n {
-		fmt.Println("Index tidak valid")
+func modifData(data *tabPolusi, n *int, kota string, polusi int) {
+	index := searchData(*data, *n, kota)
+	if index == -1 {
+		fmt.Println("Data tidak ditemukan.")
 		return
 	}
 
@@ -165,7 +181,7 @@ func cariKota(data tabPolusi, n int, kota string) {
 	return
 }
 
-func urutan(data tabPolusi, n int) {
+func urutanNaik(data *tabPolusi, n int) {
 	for i := 0; i < n-1; i++ {
 		for j := i + 1; j < n; j++ {
 			if data[i].polusi > data[j].polusi {
@@ -173,6 +189,14 @@ func urutan(data tabPolusi, n int) {
 			}
 		}
 	}
-	fmt.Println("Data telah diurutkan berdasarkan tingkat polusi.")
-	printData(data, n)
+}
+
+func urutanTurun(data *tabPolusi, n int) {
+	for i := 0; i < n-1; i++ {
+		for j := i + 1; j < n; j++ {
+			if data[i].polusi < data[j].polusi {
+				data[i], data[j] = data[j], data[i]
+			}
+		}
+	}
 }
