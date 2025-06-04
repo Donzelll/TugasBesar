@@ -7,7 +7,7 @@ Sorong 31 <br>
 Merauke 59 <br>
 Ambon 22 <br>
 
-###Sulawwesi
+### Sulawwesi
 Manado 86 <br>
 Gorontalo 58 <br>
 Palu 34 <br>
