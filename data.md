@@ -1,73 +1,76 @@
-Data Polusi Per tanggal 20 Mei 2025 ( 22:00 WIB)
+## Data Polusi Per tanggal 20 Mei 2025 ( 22:00 WIB)
 
-Jayapura 37
-Manokwari 62
-Sorong 31
-Merauke 59
-Ambon 22
+### Papua
+Jayapura 37 <br>
+Manokwari 62 <br>
+Sorong 31 <br>
+Merauke 59 <br>
+Ambon 22 <br>
 
+### Sulawwesi
+Manado 86 <br>
+Gorontalo 58 <br>
+Palu 34 <br>
+Makassar 62 <br>
 
-Manado 86
-Gorontalo 58
-Palu 34
-Makassar 62
+### Nusa Tenggara
+LabuanBajo 59 <br>
+Bali 65 <br>
 
+### Jawa
+Bayuwangi 36 <br>
+Lumajang 69 <br>
+Probolinggo 59 <br>
+Pasuruan 24 <br>
+Gempol 157 <br>
+Mojosari 76 <br>
+Surabaya 60 <br>
+Gresik 127 <br>
+Lamongan 59 <br>
+Kediri 156 <br>
+Jombang 59 <br>
+Mojokerto 59 <br>
+Bojonegoro 89 <br>
+Tuban 62 <br>
+Rembang 59 <br>
+Jepara 63 <br>
+Surakarta 68 <br>
+Sragen 43 <br>
+Madiun 59 <br>
+Nganjuk 68 <br>
+Yogyakarta 105 <br>
+Semarang 125 <br>
+Kendal 67 <br>
+Tasikmalaya 59 <br>
+Bandung 150 <br>
+Padalarang 58 <br>
+Purwakarta 59 <br>
+Cikopo 174 <br>
+Palabuhanratu 32 <br>
+LebakGede 97 <br>
+Lamaran 149 <br>
+Situterate 147 <br>
+Balaraja 19 <br>
+Tigaraksa 141 <br>
+KelapaDua 92 <br>
+Serpong 126 <br>
+Pabuaran 181 <br>
+Bogor 88 <br>
+Sentul 64 <br>
+Cikarang 127 <br>
+Jakarta 100 <br>
 
-LabuanBajo 59
-Bali 65
+### Kalimantan
+Pontianak 78 <br>
+Banjarmasin 87 <br>
+BalikPapan 53 <br>
+Pangkalpinang 39 <br>
 
-
-Bayuwangi 36
-Lumajang 69
-Probolinggo 59
-Pasuruan 24
-Gempol 157
-Mojosari 76
-Surabaya 60
-Gresik 127
-Lamongan 59
-Kediri 156
-Jombang 59
-Mojokerto 59
-Bojonegoro 89
-Tuban 62
-Rembang 59
-Jepara 63
-Surakarta 68
-Sragen 43
-Madiun 59
-Nganjuk 68
-Yogyakarta 105
-Semarang 125
-Kendal 67
-Tasikmalaya 59
-Bandung 150
-Padalarang 58
-Purwakarta 59
-Cikopo 174
-Palabuhanratu 32
-LebakGede 97
-Lamaran 149
-Situterate 147
-Balaraja 19
-Tigaraksa 141
-KelapaDua 92
-Serpong 126
-Pabuaran 181
-Bogor 88
-Sentul 64
-Cikarang 127
-Jakarta 100
-
-Pontianak 78
-Banjarmasin 87
-BalikPapan 53
-Pangkalpinang 39
-
-Palembang 107
-BandarLampung 61
-Jambi 104
-PekanBaru 71
-Medan 119
+### Sumatra
+Palembang 107 <br>
+BandarLampung 61 <br>
+Jambi 104 <br>
+PekanBaru 71 <br>
+Medan 119 <br>
 
 Total  61 Data
