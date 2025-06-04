@@ -162,3 +162,15 @@ func cariKota(data tabPolusi, n int, kota string) {
 	}
 	return
 }
+
+func urutan(data tabPolusi, n int) {
+	for i := 0; i < n-1; i++ {
+		for j := i + 1; j < n; j++ {
+			if data[i].polusi > data[j].polusi {
+				data[i], data[j] = data[j], data[i]
+			}
+		}
+	}
+	fmt.Println("Data telah diurutkan berdasarkan tingkat polusi.")
+	printData(data, n)
+}
