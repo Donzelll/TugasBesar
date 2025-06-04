@@ -8,7 +8,7 @@
 1. Penambahan Fitur Tambah
 2. Penambahan Greetings sesuai waktu (Pagi/Siang/Sore/Malam)
 
-#### Update Beta 1.1:
+#### Update Beta 1.1 (tubes2.go):
 1. Penggantian metode modif kota dari mencari berdasarkan indeks menjadi mencari berdasarkan nama kota
 2. Penambahan sub-program searching
 
