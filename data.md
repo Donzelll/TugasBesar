@@ -1,10 +1,11 @@
-Data Polusi Per tanggal 20 Mei 2025 ( 22:00 WIB)
+### Data Polusi Per tanggal 20 Mei 2025 ( 22:00 WIB)
 
-Jayapura 37
-Manokwari 62
-Sorong 31
-Merauke 59
-Ambon 22
+#### Papua
+Jayapura 37 <br>
+Manokwari 62 <br>
+Sorong 31 <br>
+Merauke 59 <br>
+Ambon 22 <br>
 
 
 Manado 86
