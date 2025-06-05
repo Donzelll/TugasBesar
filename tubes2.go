@@ -18,6 +18,8 @@ func main() {
 	var kota string
 	var inputKota string
 
+	fmt.Println("\n", waktu())
+
 	for {
 		menu()
 		fmt.Print("\nPilih menu: ")
@@ -87,7 +89,6 @@ func menu() {
 func waktu() string {
 
 	t := time.Now()
-	fmt.Println(t.Hour())
 
 	if t.Hour() < 12 {
 		return "Selamat pagi!"
@@ -136,6 +137,7 @@ func searchData(data tabPolusi, n int, searchMode bool, kota string) int {
 	if searchMode {
 		return sequentialSearch(data, n, kota)
 	} else {
+		insertionSortNaik(&data, n)
 		return binarySearch(data, n, kota)
 	}
 }
@@ -214,7 +216,7 @@ func modifData(data *tabPolusi, n *int, kota string, polusi int, modeSearch bool
 	index := searchData(*data, *n, modeSearch, kota)
 	if index == -1 {
 		fmt.Println("Data tidak ditemukan.")
-		return
+		return ``
 	}
 
 	data[index].kota = kota
